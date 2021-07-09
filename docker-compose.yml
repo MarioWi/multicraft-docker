@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  multicraft:
+    build: ./setup
+    restart: always
+    ports:
+      - "8080:80"
+      - "2111:21"
+      - "24565:24565"
+    environment:
+      - MC_FTP_IP=0.0.0.0
+      - MC_FTP_PORT=21
+      - MC_KEY=no
+      - MC_DAEMON_PW=ChangeMe
+      #- MC_DB_ENGINE=sqlite
+      - MC_DB_ENGINE=mysql
+      - MC_DB_HOST=db
+      - MC_DB_USER=mc_user
+      - MC_DB_PASSWORD=multicraft1234!
+    volumes:
+       - ./multicraftData:/multicraft
+      #- multicraftData:/mc
+
+  db:
+    image: mysql:latest
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./setup/mysqlinit.sql:/docker-entrypoint-initdb.d/mysqlinit.sql
+      #- db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - "3306:3306" 
+    environment:
+      MYSQL_ROOT_PASSWORD: abcD1234!
+
+
+#volumes:
+#  multicraftData: {}
+#  db_data: {}
