@@ -27,8 +27,6 @@ RUN usermod -u 99 nobody && \
     usermod -a -G users && \
     chown -R nobody:users /home
 
-RUN if ["$ENV" = ]
-
 RUN apt-get update \
     && apt-get install -y --no-install-recommends tzdata curl ca-certificates fontconfig locales \
     && echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen \
