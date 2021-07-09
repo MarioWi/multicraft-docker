@@ -72,7 +72,7 @@ RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/AdoptOpenJDK/openjdk16-b
 ENV JAVA_HOME=/opt/java/openjdk-16 \
     PATH="/opt/java/openjdk-11/bin:/opt/java/openjdk-16/bin:$PATH"
 
-COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf 
+COPY setup/000-default.conf /etc/apache2/sites-enabled/000-default.conf 
 
 RUN mkdir -p /scripts/
 COPY setup/install.sh /scripts/install.sh 
