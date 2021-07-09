@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>multicraft</Name>
+  <Repository>mariowi/multicraft</Repository>
+  <Registry>https://hub.docker.com/r/mariowi/multicraft/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/r/mariowi/multicraft/</Support>
+  <Project/>
+  <Overview>dockerized multicraft-server   Converted By Community Applications   Always verify this template (and values) against the dockerhub support page for the container</Overview>
+  <Category>GameServers: Status:Stable</Category>
+  <WebUI>https://[IP]:[PORT:80]</WebUI>
+  <TemplateURL/>
+  <Icon>https://github.com/MarioWi/multicraft-docker/blob/main/docs/Multicraft_icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1625847479</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>dockerized multicraft-server   Converted By Community Applications   Always verify this template (and values) against the dockerhub support page for the container</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort/>
+        <ContainerPort>80</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort/>
+        <ContainerPort>21</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort/>
+        <ContainerPort>6000-6005</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort/>
+        <ContainerPort>15580-15590</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort/>
+        <ContainerPort>25580-25590</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort/>
+        <ContainerPort>35580-35590</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/multicraft</HostDir>
+      <ContainerDir>/multicraft</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value/>
+      <Name>MC_KEY</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>mysql</Value>
+      <Name>MC_DB_ENGINE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>MC_DB_HOST</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>multicraft_daemon</Value>
+      <Name>MC_DB_NAME</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>MC_DB_USER</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>MC_DB_PASSWORD</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>MC_DB_NAME_WEB</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>MC_DAEMON_PW</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="multicraftData" Target="/multicraft" Default="/mnt/user/appdata/multicraft" Mode="rw" Description="Container Path: /multicraft" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/multicraft</Config>
+  <Config Name="Panel" Target="80" Default="8080" Mode="tcp" Description="Container Port: 80" Type="Port" Display="always" Required="true" Mask="false"/>
+  <Config Name="FTP" Target="21" Default="21" Mode="tcp" Description="Container Port: 21" Type="Port" Display="always" Required="true" Mask="false"/>
+  <Config Name="passiveFTP" Target="6000-6005" Default="6000-6005" Mode="tcp" Description="Container Port: 6000-6005" Type="Port" Display="always-hide" Required="false" Mask="false"/>
+  <Config Name="GeyserMC" Target="15580-15590" Default="15580-15590" Mode="tcp" Description="Container Port: 15580-15590" Type="Port" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Server" Target="25580-25590" Default="25580-25590" Mode="tcp" Description="Container Port: 25580-25590" Type="Port" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="dynMap" Target="35580-35590" Default="35580-35590" Mode="tcp" Description="Container Port: 35580-35590" Type="Port" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Multicraft Key" Target="MC_KEY" Default="no" Mode="" Description="Container Variable: MC_KEY" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Daemon Password" Target="MC_DAEMON_PW" Default="ChangeMe" Mode="" Description="Container Variable: MC_DAEMON_PW" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="DB Engine" Target="MC_DB_ENGINE" Default="sqlite" Mode="" Description="Container Variable: MC_DB_ENGINE" Type="Variable" Display="always" Required="true" Mask="false">mysql</Config>
+  <Config Name="DB-Host" Target="MC_DB_HOST" Default="db" Mode="" Description="Container Variable: MC_DB_HOST" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="DB-User" Target="MC_DB_USER" Default="mc_user" Mode="" Description="Container Variable: MC_DB_USER" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="DB-Password" Target="MC_DB_PASSWORD" Default="ChangeMe" Mode="" Description="Container Variable: MC_DB_PASSWORD" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="DB-Name" Target="MC_DB_NAME" Default="multicraft_daemon" Mode="" Description="Container Variable: MC_DB_NAME" Type="Variable" Display="advanced" Required="false" Mask="false">multicraft_daemon</Config>
+  <Config Name="DB-Name Web" Target="MC_DB_NAME_WEB" Default="multicraft_panel" Mode="" Description="Container Variable: MC_DB_NAME_WEB" Type="Variable" Display="advanced" Required="false" Mask="false">multicraft_panel</Config>
+</Container>
