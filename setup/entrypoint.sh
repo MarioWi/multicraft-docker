@@ -28,10 +28,10 @@ MC_DAEMON_PORT="25465"
 MC_DAEMON_DATA="/multicraft/data/daemon.db"
 MC_WEB_DATA="/multicraft/data/panel.db"
 MC_DAEMON_PW=${MC_DAEMON_PW:-"ChangeMe"}
+MC_FTP_SERVER=${MC_FTP_SERVER:-"y"}
 MC_FTP_IP=${MC_FTP_IP:-""}
 MC_FTP_NATIP=${MC_FTP_NATIP:-""}
 MC_FTP_PORT=${MC_FTP_PORT:-"21"}
-MC_FTP_SERVER=${MC_FTP_SERVER:-"y"}
 MC_DB_ENGINE=${MC_DB_ENGINE:-"sqlite"}
 MC_DB_HOST=${MC_DB_HOST:-"db"}
 MC_DB_NAME=${MC_DB_NAME:-"multicraft_daemon"}
@@ -229,6 +229,12 @@ service apache2 start
 
 # If new install
 if [ "$NEWINSTALL" == 1 ]; then
+
+    if [ "$MC_KEY" != "no" ]; then
+        echo
+        echo "[$(date +%Y-%m-%d_%T)] - Creating Licence File"
+        echo "$MC_KEY" > "/opt/multicraft/multicraft.key"
+    fi
 
     cp -r /opt/multicraft/jar/* /multicraft/jar
     chown -R nobody:users /multicraft/jar
