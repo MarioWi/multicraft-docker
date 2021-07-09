@@ -75,10 +75,10 @@ ENV JAVA_HOME=/opt/java/openjdk-16 \
 COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf 
 
 RUN mkdir -p /scripts/
-COPY install.sh /scripts/install.sh 
+COPY setup/install.sh /scripts/install.sh 
 RUN chmod +x /scripts/install.sh && \
     /scripts/install.sh
-COPY entrypoint.sh /scripts/entrypoint.sh
+COPY setup/entrypoint.sh /scripts/entrypoint.sh
 RUN chmod +x /scripts/entrypoint.sh
 
 EXPOSE 80
