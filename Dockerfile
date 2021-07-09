@@ -24,7 +24,6 @@ RUN usermod -u 99 nobody && \
     usermod -g 100 nobody && \
     usermod -d /home nobody && \
     usermod -a -G users www-data && \
-    usermod -a -G users && \
     chown -R nobody:users /home
 
 RUN apt-get update \
