@@ -17,10 +17,9 @@
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
-  <DateInstalled>1625847479</DateInstalled>
   <DonateText/>
   <DonateLink/>
-  <Description>dockerized multicraft-server   Converted By Community Applications   Always verify this template (and values) against the dockerhub support page for the container</Description>
+  <Description>dockerized multicraft-server</Description>
   <Networking>
     <Mode>bridge</Mode>
     <Publish>
