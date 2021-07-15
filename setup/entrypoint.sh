@@ -233,7 +233,8 @@ if [ "$NEWINSTALL" == 1 ]; then
     if [ "$MC_KEY" != "no" ]; then
         echo
         echo "[$(date +%Y-%m-%d_%T)] - Creating Licence File"
-        echo "$MC_KEY" > "/opt/multicraft/multicraft.key"
+        echo "$MC_KEY" > "/multicraft/multicraft.key"
+        ln -s /multicraft/multicraft.key /opt/multicraft/multicraft.key
     fi
 
     cp -r /opt/multicraft/jar/* /multicraft/jar
