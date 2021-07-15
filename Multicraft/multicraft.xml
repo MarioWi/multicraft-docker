@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>multicraft</Name>
+  <Name>Multicraft</Name>
   <Repository>mariowi/multicraft</Repository>
   <Registry>https://hub.docker.com/r/mariowi/multicraft/</Registry>
   <Network>bridge</Network>
@@ -11,9 +11,9 @@
   <Project/>
   <Overview>dockerized multicraft-server   Converted By Community Applications   Always verify this template (and values) against the dockerhub support page for the container</Overview>
   <Category>GameServers: Status:Stable</Category>
-  <WebUI>https://[IP]:[PORT:80]</WebUI>
-  <TemplateURL>https://github.com/MarioWi/multicraft-docker/blob/main/multicraft.xml<TemplateURL>
-  <Icon>https://github.com/MarioWi/multicraft-docker/blob/main/docs/multicraft_icon.png</Icon>
+  <WebUI>http://[IP]:[PORT:80]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/MarioWi/multicraft-docker/main/Multicraft/multicraft.xml<TemplateURL>
+  <Icon>https://raw.githubusercontent.com/MarioWi/multicraft-docker/main/docs/multicraft_icon.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
