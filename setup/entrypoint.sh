@@ -293,6 +293,11 @@ ln -s /multicraft/html /var/www/html
 chown -R www-data:www-data /var/www/html/
 echo "[$(date +%Y-%m-%d_%T)] - Symlinked HTML"
 
+if [ -f /opt/multicraft/multicraft.key ]; then
+    rm /opt/multicraft/multicraft.key
+    ln -s /multicraft/configs/multicraft.key /opt/multicraft/multicraft.key
+fi
+echo "[$(date +%Y-%m-%d_%T)] - Symlinked Key"
 
 # Start and stop Multicraft to set permissions
 /opt/multicraft/bin/multicraft start

@@ -32,9 +32,9 @@ Hierzu wurde im Unterordner *examples* eine *docker-compose.yml* ebgelegt, diese
 - 19132-19133/udp Standard Ports für Bedrock Server
 
 Da ich auf meinen Servern fast immer eine Map mit [dynMap](https://www.spigotmc.org/resources/dynmap.274/) sowie die Möglichkeit mit Bedrock clients auf den Java Servern zu joinen ([GeyserMC](https://geysermc.org/) in Verbindung mit [Floodgate](https://github.com/GeyserMC/Floodgate/)) nutze, habe ich hier Portranges für 11 Server (Java und Bedrock) sowie für dynMap reserviert bzw. freigegeben. Die entsprechenden Ports müssen zur finalen Verwendung in den Server-Einstellungen sowie den Konfigurationen für dynMap und GeyserMC eingerichtet werden.
-- 15580-15590 
-- 25580-25590
-- 35580-35590
+- 15580-15590 reserved for GyserMC (Bedrock-Clients)
+- 25580-25590 reserved for Server (normal Java-Clients)
+- 35580-35590 reserved for dynMap
 
 ## Volumes
 `/multicraft` Volume mit Unterordnern für 
