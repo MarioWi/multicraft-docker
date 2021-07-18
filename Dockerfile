@@ -87,8 +87,12 @@ EXPOSE 25565/udp
 # Bedrock
 EXPOSE 19132-19133/udp
 
-EXPOSE 15580-15590
+# Reserved for
+# GeyserMC
+EXPOSE 15580-15590/udp
+# Server
 EXPOSE 25580-25590
+# dynMap
 EXPOSE 35580-35590
 
 VOLUME /multicraft
