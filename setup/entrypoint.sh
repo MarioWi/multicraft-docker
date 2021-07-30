@@ -44,9 +44,8 @@ MC_LOCAL="y"
 MC_MULTIUSER=${MC_MULTIUSER:-"n"}
 MC_PLUGINS=""
 MC_WEB_USER="nobody:users"
-#MC_WEB_USER="www-data"
+MC_SERVER_NAME=${MC_SERVER_NAME:-""}
 MC_CREATE_USER="y"
-###MC_WEB_DIR="$DIR_ROOT/panel"
 
 CFG="/multicraft/configs/multicraft.conf"
 WEB_CFG="/multicraft/configs/panel.php"
@@ -209,7 +208,9 @@ if [ ! -f /multicraft/configs/apache.conf ]; then
 
     cp /etc/apache2/sites-enabled/000-default.conf /multicraft/configs/apache.conf
     rm /etc/apache2/sites-enabled/000-default.conf
-
+    if [ "$MC_SERVER_NAME" != "" ]; then
+        sed -i -E "s|^#ServerName\s=\s(\S*)|ServerName = ${MC_SERVER_NAME}|" /multicraft/configs/apache.conf
+    fi
     ln -s /multicraft/configs/apache.conf /etc/apache2/sites-enabled/000-default.conf
 
 else
