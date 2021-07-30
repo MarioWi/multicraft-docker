@@ -96,9 +96,6 @@ EXPOSE 25580-25590
 EXPOSE 35580-35590
 
 VOLUME /multicraft
-ENV mysqlhost=192.168.2.2
-ENV mysqldbname=multicraft
-ENV FTPNatIP=192.168.2.2
 
 ENV MC_DAEMON_ID="1" \
     MC_DAEMON_PW="ChangeMe" \
@@ -117,5 +114,4 @@ ENV MC_DAEMON_ID="1" \
     MC_MULTIUSER="n" \
     DEBUG=false
 
-#CMD ["/scripts/init.sh"]
 CMD ["/scripts/entrypoint.sh"]
