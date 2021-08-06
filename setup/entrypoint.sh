@@ -29,7 +29,7 @@ MC_DAEMON_DATA="/multicraft/data/daemon.db"
 MC_WEB_DATA="/multicraft/data/panel.db"
 MC_DAEMON_PW=${MC_DAEMON_PW:-"ChangeMe"}
 MC_FTP_SERVER=${MC_FTP_SERVER:-"y"}
-MC_FTP_IP=${MC_FTP_IP:-""}
+MC_FTP_IP=${MC_FTP_IP:-"0.0.0.0"}
 MC_FTP_NATIP=${MC_FTP_NATIP:-""}
 MC_FTP_PORT=${MC_FTP_PORT:-"21"}
 MC_DB_ENGINE=${MC_DB_ENGINE:-"sqlite"}
@@ -103,8 +103,8 @@ if [ ! -f /multicraft/configs/multicraft.conf ]; then
     sed -i -E "s|^baseDir\s=\s(\S*)|baseDir = /opt/multicraft|" /multicraft/configs/multicraft.conf
 
     if [ "$MC_FTP_SERVER" = "y" ]; then
-        #sed -i -E "s|^#ftpIp\s=\s(\S*)|ftpIp = ${MC_FTP_IP}|" /multicraft/configs/multicraft.conf
-        sed -i -E "s|^#ftpIp\s=\s(\S*)|ftpIp = 0.0.0.0|" /multicraft/configs/multicraft.conf
+        sed -i -E "s|^#ftpIp\s=\s(\S*)|ftpIp = ${MC_FTP_IP}|" /multicraft/configs/multicraft.conf
+        #sed -i -E "s|^#ftpIp\s=\s(\S*)|ftpIp = 0.0.0.0|" /multicraft/configs/multicraft.conf
         sed -i -E "s|^enabled\s=\s(\S*)|enabled = true|" /multicraft/configs/multicraft.conf
         sed -i -E "s|^#ftpNatIp\s=\s(\S*)|ftpNatIp = ${MC_FTP_NATIP}|" /multicraft/configs/multicraft.conf
         sed -i -E "s|^#ftpPasvPorts\s=\s(\S*)|ftpPasvPorts = 6000-6005|" /multicraft/configs/multicraft.conf
