@@ -1,16 +1,8 @@
-Title:    Multicraft Docker
-Date:     2021.07.09
-Author:   Mario Wicke
-Keywords: Multicraft, Minecraft, unRaid, Docker
 # Multicraft Docker
 Dockerized Multicraft-Server
 
-README ***WIP***
-
-*english description below*
-
 ## Beschreibung
-Inspieriert wurde dieser Docker-Container von den folgenden Repos. Jedoch konnte keines meine Bedürfnisse vollumfänglich erfüllen. Da ich mehrere Minecraft-Server laufen lassen wollte, benötigte ich mindestens 10 frei gegebene Ports. Für dynMap und GeyserMC werden jeweils auch ein zusätzlicher Port je Server benötigt, also nochmal 20 Ports mehr. Der Container sollte auch unter unRaid laufen können. Daher habe ich mich entschieden den Container auf Basis der oben genannten Repos an meine Bedürfnisse anzupassen.
+Inspieriert wurde dieser Docker-Container von den unter Credits genannten Repos. Jedoch konnte keines meine Bedürfnisse vollumfänglich erfüllen. Da ich mehrere Minecraft-Server laufen lassen wollte, benötigte ich mindestens 10 frei gegebene Ports. Für dynMap und GeyserMC werden jeweils auch ein zusätzlicher Port je Server benötigt, also nochmal 20 Ports mehr. Der Container sollte auch unter unRaid laufen können. Daher habe ich mich entschieden den Container auf Basis der oben genannten Repos an meine Bedürfnisse anzupassen.
 
 ### Multicraft
 Multicraft ist eine Hosting Lösung mit integriertem Control Panel für Minecraft. ![Multicraft](https://raw.githubusercontent.com/MarioWi/multicraft-docker/main/docs/Multicraft_logo.png) [Multicraft.org](www.multicraft.org) 
@@ -56,26 +48,26 @@ Mögliche ENV-Variablen sind weiter unten beschrieben.
 #### Schritt 1: Template Reposirory hinzufügen
 In unRaid unter Docker das folgende Template Repository hinzufügen
     https://github/mariowi/multicraft-docker
-***ScreenShot hinzufügen***
+***#ToDo: ScreenShot hinzufügen***
 
 
 #### Schritt 2: Container hinzufügen
 1. Auf **Add Container** klicken
 2. Die default Werte überprüfen und ggf. anpassen, anschließend auf **Apply** klicken.
-***ScreenShot hinzufügen***
+***#ToDo: ScreenShot hinzufügen***
 
 
 #### Schritt 4: Warten, bis Image heruntergeladen
 Das Image wird nun heruntergeladen un der Container erstellt.
 Wenn das erfolgt ist, auf **Done** klicken.
-***ScreenShot hinzufügen***
+***#ToDo: ScreenShot hinzufügen***
 
 
 #### Fertig: Multicraft Panel einrichten
 Der Container ist nun fertig heruntergeladen nud bereit für die Konfiguration von Multicraft über das Web-Panel.
 
-Das Web-Panel ist zu erreichen über `http:IP_ADRESS:80`, oder uber die Auswahl von **WebUI** bei dem Container in unRaid.
-***ScreenShot hinzufügen***
+Das Web-Panel ist zu erreichen über `http://IP_ADRESS:8080`(Port muss ggf. angepasst werden, falls dieser in der Konfiguration angepasst wurde), oder uber die Auswahl von **WebUI** bei dem Container in unRaid.
+***#ToDo: ScreenShot hinzufügen***
 
 
 
@@ -85,9 +77,9 @@ Das Web-Panel ist zu erreichen über `http:IP_ADRESS:80`, oder uber die Auswahl 
 - 6000-6005 Passive FTP-Ports
 - 25565 und 25565/udp Standard Port für Minecraft Server
 - 19132-19133/udp Standard Ports für Bedrock Server
-- 15580-15590/udp reserved for GyserMC (Bedrock-Clients)
-- 25580-25590 reserved for Server (normal Java-Clients)
-- 35580-35590 reserved for dynMap
+- 15580-15590/udp vorgesehen für GyserMC (Bedrock-Clients)
+- 25580-25590 vorgesehen für Server (normal Java-Clients)
+- 35580-35590 vorgesehen für dynMap
 
 ## Volume
 `/multicraft` Volume mit Unterordnern für 
@@ -128,10 +120,9 @@ In der aktuellen Verion sind noch folgende Probleme bzw. Einschränkungen vorhan
 - Multicraft API
     - noch nicht implementiert, *vorerst nicht geplant*
 
-### Pläne
-- Wiki Einträge zur Einrichtung und Nutzung
-- Wiki Einträge zur Nutzung mit unRaid
-- Konfiguration (XML) für unRaid hinzufügen
 
-# English description
-***TBD***
+## Credits
+Inspirierende Repos
+* [AsakuraFuuko/multicraft](https://github.com/AsakuraFuuko/multicraft)
+* [LZStealth/Docker-Multicraft](https://github.com/LZStealth/Docker-Multicraft)
+* [Clutch152/multicraft-docker](https://github.com/Clutch152/multicraft-docker)
