@@ -50,24 +50,24 @@ RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/adoptium/temurin11-binar
     tar -xf /tmp/openjdk.tar.gz --strip-components=1; \
     rm -rf /tmp/openjdk.tar.gz;
 
-## install jdk-15.0.2%2B7
-#RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15.0.2%2B7/OpenJDK15U-jdk_x64_linux_hotspot_15.0.2_7.tar.gz'; \
-#    echo "94f20ca8ea97773571492e622563883b8869438a015d02df6028180dd9acc24d */tmp/openjdk.tar.gz" | sha256sum -c -; \
-#    mkdir -p /opt/java/openjdk-15; \
-#    cd /opt/java/openjdk-15; \
+## install jdk-16.0.2+7
+#RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_linux_hotspot_16.0.2_7.tar.gz'; \
+#    echo "323d6d7474a359a28eff7ddd0df8e65bd61554a8ed12ef42fd9365349e573c2c */tmp/openjdk.tar.gz" | sha256sum -c -; \
+#    mkdir -p /opt/java/openjdk-16; \
+#    cd /opt/java/openjdk-16; \
 #    tar -xf /tmp/openjdk.tar.gz --strip-components=1; \
 #    rm -rf /tmp/openjdk.tar.gz;
 
-# install jdk-16.0.2+7
-RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_linux_hotspot_16.0.2_7.tar.gz'; \
+# install jdk-17.0.1+12
+RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1%2B12/OpenJDK17U-jdk_x64_linux_hotspot_17.0.1_12.tar.gz'; \
     echo "323d6d7474a359a28eff7ddd0df8e65bd61554a8ed12ef42fd9365349e573c2c */tmp/openjdk.tar.gz" | sha256sum -c -; \
-    mkdir -p /opt/java/openjdk-16; \
-    cd /opt/java/openjdk-16; \
+    mkdir -p /opt/java/openjdk-17; \
+    cd /opt/java/openjdk-17; \
     tar -xf /tmp/openjdk.tar.gz --strip-components=1; \
     rm -rf /tmp/openjdk.tar.gz;
 
-ENV JAVA_HOME=/opt/java/openjdk-16 \
-    PATH="/opt/java/openjdk-16/bin:$PATH"
+ENV JAVA_HOME=/opt/java/openjdk-17 \
+    PATH="/opt/java/openjdk-17/bin:$PATH"
 
 COPY setup/000-default.conf /etc/apache2/sites-enabled/000-default.conf 
 

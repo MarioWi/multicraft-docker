@@ -9,12 +9,13 @@ Multicraft ist eine Hosting Lösung mit integriertem Control Panel für Minecraf
 
 ### Aufbau des Containers
 Als Basis Image für diesen Container wird Ubuntu 20.04 verwendet.
-Dieser Multicraft Docker-Container ist mit (Java) Minecraft Minecraft >= V1.17 kompatibel, dazu wird Adopt openJDK 16.0.1+9 mit HotSpot JVM installiert. Der Pfad zu der Java dieser Version wird automatisch in die Config-Dateien eingetragen.
+Dieser Multicraft Docker-Container ist mit (Java) Minecraft Minecraft >= V1.17 kompatibel, dazu wird Adoptium openJDK 17.0.1+12 mit HotSpot JVM installiert. Der Pfad zu der Java dieser Version wird automatisch in die Config-Dateien eingetragen.
 
-Für Versionen < 1.17 wurde parallel die LTS Version Adopt openJDK jdk-11.0.11+9 ebenfalls mit HotSpot JVM installiert.
+Für Versionen < 1.17 wurde parallel die LTS Version Adopt openJDK 11.0.13+8 ebenfalls mit HotSpot JVM installiert.
 Für diese Java-Version muss die entsprechende Server.jar.conf angepasst und der Pfad zur Java-Datei eingetragen werden.
+Dazu muss in der entsprechenden jar.conf zum Beispiel *spigot-1.16.5.jar.conf* die Variable *{JAVA}* durch */opt/java/openjdk-11/bin/java* ersetzt werden.
 
-In dem Dockerfile ist aktuell noch vorgesehen die Adopt openJDK Version 15.0.2+7 zu installieren. Da die Version 11.0.11+9 eine LTS Version ist, wurde dieser Bereich jedoch auskommentiert.
+In dem Dockerfile ist aktuell noch vorgesehen die Adopt openJDK Version 16.0.2+7 zu installieren. Da die Version 11.0.13+8 eine LTS Version ist, wurde dieser Bereich jedoch auskommentiert.
 
 Obwohl dieser Container auch per Commandline gestartet werden kann, empfiehlt es sich doch docker-compose zu verwenden, und die benötigten Environment-Variablen zu übergeben.
 Hierzu wurde im Unterordner *examples* eine *docker-compose.yml* ebgelegt, diese soll den Start erleichtern.
