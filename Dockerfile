@@ -42,9 +42,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     update-alternatives --set php /usr/bin/php${PHP_VERSION}
 
-# install jdk-11.0.11%2B9
-RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.11_9.tar.gz'; \
-    echo "e99b98f851541202ab64401594901e583b764e368814320eba442095251e78cb */tmp/openjdk.tar.gz" | sha256sum -c -; \
+# install jdk-11.0.13+8
+RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.13%2B8/OpenJDK11U-jdk_x64_linux_hotspot_11.0.13_8.tar.gz'; \
+    echo "3b1c0c34be4c894e64135a454f2d5aaa4bd10aea04ec2fa0c0efe6bb26528e30 */tmp/openjdk.tar.gz" | sha256sum -c -; \
     mkdir -p /opt/java/openjdk-11; \
     cd /opt/java/openjdk-11; \
     tar -xf /tmp/openjdk.tar.gz --strip-components=1; \
@@ -58,16 +58,16 @@ RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/AdoptOpenJDK/openjdk11-b
 #    tar -xf /tmp/openjdk.tar.gz --strip-components=1; \
 #    rm -rf /tmp/openjdk.tar.gz;
 
-# install jdk-16.0.1%2B9
-RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/AdoptOpenJDK/openjdk16-binaries/releases/download/jdk-16.0.1%2B9/OpenJDK16U-jdk_x64_linux_hotspot_16.0.1_9.tar.gz'; \
-    echo "7fdda042207efcedd30cd76d6295ed56b9c2e248cb3682c50898a560d4aa1c6f */tmp/openjdk.tar.gz" | sha256sum -c -; \
+# install jdk-16.0.2+7
+RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_linux_hotspot_16.0.2_7.tar.gz'; \
+    echo "323d6d7474a359a28eff7ddd0df8e65bd61554a8ed12ef42fd9365349e573c2c */tmp/openjdk.tar.gz" | sha256sum -c -; \
     mkdir -p /opt/java/openjdk-16; \
     cd /opt/java/openjdk-16; \
     tar -xf /tmp/openjdk.tar.gz --strip-components=1; \
     rm -rf /tmp/openjdk.tar.gz;
 
 ENV JAVA_HOME=/opt/java/openjdk-16 \
-    PATH="/opt/java/openjdk-11/bin:/opt/java/openjdk-16/bin:$PATH"
+    PATH="/opt/java/openjdk-16/bin:$PATH"
 
 COPY setup/000-default.conf /etc/apache2/sites-enabled/000-default.conf 
 
