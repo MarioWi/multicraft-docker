@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Container version="2">
+<Container version="2.2">
   <Name>Multicraft</Name>
   <Repository>mariowi/multicraft</Repository>
   <Registry>https://hub.docker.com/r/mariowi/multicraft/</Registry>
