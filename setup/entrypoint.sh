@@ -51,7 +51,7 @@ CFG="/multicraft/configs/multicraft.conf"
 WEB_CFG="/multicraft/configs/panel.php"
 
 
-MC_JAVA="/opt/java/openjdk-16/bin/java"
+MC_JAVA="/opt/java/openjdk-17/bin/java"
 MC_ZIP="/usr/bin/zip"
 MC_UNZIP="/usr/bin/unzip"
 
@@ -296,8 +296,8 @@ echo "[$(date +%Y-%m-%d_%T)] - Symlinked HTML"
 
 if [ -f /opt/multicraft/multicraft.key ]; then
     rm /opt/multicraft/multicraft.key
-    ln -s /multicraft/configs/multicraft.key /opt/multicraft/multicraft.key
 fi
+ln -s /multicraft/configs/multicraft.key /opt/multicraft/multicraft.key
 echo "[$(date +%Y-%m-%d_%T)] - Symlinked Key"
 
 # Start and stop Multicraft to set permissions
