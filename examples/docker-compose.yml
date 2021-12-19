@@ -19,14 +19,16 @@ services:
       - MC_DB_USER=mc_user
       - MC_DB_PASSWORD=multicraft1234!
     volumes:
-       - ./multicraftData:/multicraft
+       - ../multicraftData:/multicraft
       #- multicraftData:/mc
 
   db:
     image: mysql:latest
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
     volumes:
-      - ./db:/var/lib/mysql
-      - ./setup/mysqlinit.sql:/docker-entrypoint-initdb.d/mysqlinit.sql
+      - ../db:/var/lib/mysql
+      - ../setup/mysqlinit.sql:/docker-entrypoint-initdb.d/mysqlinit.sql
       #- db_data:/var/lib/mysql
     restart: always
     ports:
