@@ -69,13 +69,13 @@ RUN curl -LfsSo /tmp/openjdk.tar.gz 'https://github.com/adoptium/temurin17-binar
 ENV JAVA_HOME=/opt/java/openjdk-17 \
     PATH="/opt/java/openjdk-17/bin:$PATH"
 
-COPY setup/000-default.conf /etc/apache2/sites-enabled/000-default.conf 
+COPY ./setup/000-default.conf /etc/apache2/sites-enabled/000-default.conf 
 
 RUN mkdir -p /scripts/
-COPY setup/install.sh /scripts/install.sh 
+COPY ./setup/install.sh /scripts/install.sh 
 RUN chmod +x /scripts/install.sh && \
     /scripts/install.sh
-COPY setup/entrypoint.sh /scripts/entrypoint.sh
+COPY ./setup/entrypoint.sh /scripts/entrypoint.sh
 RUN chmod +x /scripts/entrypoint.sh
 
 EXPOSE 80
