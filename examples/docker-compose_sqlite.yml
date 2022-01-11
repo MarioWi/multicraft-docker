@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  multicraft:
+    build: 
+      context: ../
+      args:
+        - USERID=99
+        - GROUPID=100
+        - USERNAME=multicraft
+    restart: always
+    ports:
+      - "8080:80"
+      - "2111:21"
+      - "25565:25565"
+    environment:
+      - MC_FTP_IP=0.0.0.0
+      - MC_FTP_PORT=21
+      - MC_KEY=no
+      - MC_DAEMON_PW=ChangeMe
+      - MC_DB_ENGINE=sqlite
+      - MC_MULTIUSER=y
+    volumes:
+      - ../multicraftData:/multicraft

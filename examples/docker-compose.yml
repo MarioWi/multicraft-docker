@@ -2,12 +2,17 @@ version: '3'
 
 services:
   multicraft:
-    build: ../
+    build: 
+      context: ../
+      args:
+        - USERID=99
+        - GROUPID=100
+        - USERNAME=multicraft
     restart: always
     ports:
       - "8080:80"
       - "2111:21"
-      - "24565:24565"
+      - "25565:25565"
     environment:
       - MC_FTP_IP=0.0.0.0
       - MC_FTP_PORT=21
@@ -18,9 +23,11 @@ services:
       - MC_DB_HOST=db
       - MC_DB_USER=mc_user
       - MC_DB_PASSWORD=multicraft1234!
+      - MC_MULTIUSER=y
     volumes:
-       - ../multicraftData:/multicraft
-      #- multicraftData:/mc
+      - ../multicraftData:/multicraft
+    depends_on:
+      - "db"
 
   db:
     image: mysql:latest
@@ -29,14 +36,8 @@ services:
     volumes:
       - ../db:/var/lib/mysql
       - ../setup/mysqlinit.sql:/docker-entrypoint-initdb.d/mysqlinit.sql
-      #- db_data:/var/lib/mysql
     restart: always
     ports:
       - "3306:3306" 
     environment:
       MYSQL_ROOT_PASSWORD: abcD1234!
-
-
-#volumes:
-#  multicraftData: {}
-#  db_data: {}

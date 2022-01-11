@@ -1,5 +1,36 @@
 #!/bin/bash
-umask 000
+
+umask ${MASK}
+
+# check and set user and group
+if [ $(getent passwd "$USERID") ]; then
+    USERNAME_2=$(getent passwd "$USERID" | cut -d: -f1)
+    echo "[$(date +%Y-%m-%d_%T)] - User ID ($USERID) bereits vorhanden! User: $USERNAME_2"
+    USERNAME=$USERNAME_2
+else
+    if [ $(getent passwd "$USERNAME") ]; then
+        USERID_2=$(getent passwd "$USERNAME" | cut -d: -f1)
+        echo "[$(date +%Y-%m-%d_%T)] - User Name ($USERNAME) bereits vorhanden! User: $USERID_2"
+        echo "[$(date +%Y-%m-%d_%T)] - Setze User ID $USERID für User $USERNAME!"
+        usermod -u ${USERID} ${USERNAME}
+    fi
+fi
+
+if [ $(getent group "$GROUPID") ]; then
+    GROUPNAME=$(getent group "$GROUPID" | cut -d: -f1)
+    #usermod -a -G ${GROUPNAME} ${USERNAME}
+    usermod -g ${GROUPNAME} ${USERNAME}
+    echo "[$(date +%Y-%m-%d_%T)] - Group ID ($GROUPID) bereits vorhanden! Gruppe: $GROUPNAME"
+else
+    GROUPNAME="$USERNAME"
+    usermod -g ${GROUPID} ${USERNAME}
+fi
+usermod -a -G www-data $USERNAME
+
+# Safe username and groupname for aditional scripts
+mkdir -p /opt/multicraft/
+echo "$USERNAME" > "/opt/multicraft/USERNAME"
+echo "$GROUPNAME" > "/opt/multicraft/GROUPNAME"
 
 # Download and unzip aktual multicraft
 wget http://www.multicraft.org/download/linux64 -O /tmp/multicraft.tar.gz && \
@@ -9,23 +40,18 @@ wget http://www.multicraft.org/download/linux64 -O /tmp/multicraft.tar.gz && \
 # Enable Apache Rewrite
 a2enmod rewrite
 
-# Create the Panel WebFolder
-mkdir -p /var/www/html/multicraft
-
-# Copy the web files over to the html folder
-cp -rf /tmp/multicraft/panel/* /var/www/html/multicraft
-
 # Update website owner to www-data:www-data
-chown -R www-data:www-data /var/www/html/
+chown -R ${USERNAME}:www-data /var/www/html/
 
 # Remove default index.html file in the html folder.
 rm /var/www/html/index.html
 
-# Remove the panel folder from the multicraft folder
-rm -rf /tmp/multicraft/panel
-
 # Copy multicraft binaries to /opt
 cp -rf /tmp/multicraft /opt/
 
-# Change the multicraft binary to nobody:users
-chown -R nobody:users /opt/multicraft
+# Remove the temporary multicraft folder
+rm -rf /tmp/multicraft
+
+# Change the multicraft binary to ${UID}:${GID}
+#chown -R nobody:users /opt/multicraft
+chown -R ${USERNAME}:${GROUPNAME} /opt/multicraft
