@@ -11,7 +11,7 @@ Dockerized Multicraft-Server
 </p>
 
 # **ACHTUNG!**
-Aufgrund des letzten Updates an dem Kontainer, sind die beiden Konfig-Dateien apache.conf und multicraft.conf nicht zu 100% kompatibel.
+Aufgrund des letzten Updates an dem Kontainer, sind die beiden Konfig-Dateien *apache.conf* und *multicraft.conf* nicht zu 100% kompatibel.
 Wenn die alten Konbfigurationsdateien weiterhin verwendet werden, kommt es daher zu Fehlern und Multicraft sowie die Oberfläche starten nicht.
 Weitere Informationen unter: [Update](https://github.com/MarioWi/multicraft-docker/blob/main/UPDATE.md)
 ---
