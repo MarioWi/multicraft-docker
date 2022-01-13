@@ -83,6 +83,10 @@ mkdir -p ${MC_DIR}/scripts
 # Change multicraft owner to ${MC_USER}
 chown -R ${MC_USER} ${MC_DIR}
 
+MC_DIR_ALL="${MC_DIR}/jar ${MC_DIR}/data ${MC_DIR}/templates ${MC_DIR}/configs ${MC_DIR}/html ${MC_DIR}/scripts "
+#MC_DIR_OPT_ALL="${MC_OPT_DIR}/jar ${MC_OPT_DIR}/data ${MC_OPT_DIR}/templates ${MC_OPT_DIR}/scripts "
+MC_DIR_SERVERS=${MC_DIR}/servers
+#MC_DIR_OPT_SERVERS=${MC_OPT_DIR}/servers
 
 #######
 
@@ -227,7 +231,7 @@ if [ "$MC_LOCAL" = "y" ]; then
 
                 # Wait for DB
                 #while [ !(mysql -u root -e 'use mydbname') ]
-                while ! mysql -h "${MC_DB_HOST}" -u "${MC_DB_USER}" "-p${MC_DB_PASSWORD}" "${MC_DB_NAME}"
+                while ! mysql -h "${MC_DB_HOST}" -u "${MC_DB_USER}" "-p${MC_DB_PASSWORD}" "${MC_DB_NAME}"  > /dev/null 2>&1
                 do
                     echo "[$(date +%Y-%m-%d_%T)] - Waiting for mySQL DB check again in 10s"
                     sleep 10s
@@ -235,11 +239,11 @@ if [ "$MC_LOCAL" = "y" ]; then
 
                 # Set Panel settings.
                 sed -i -E "s|^\s*'panel_db'\s=>\s'(s\S*),|    'panel_db' => 'mysql:host=${MC_DB_HOST};dbname=${MC_DB_NAME_WEB}',\n    'panel_db_user' => '${MC_DB_USER}',\n    'panel_db_pass' => '${MC_DB_PASSWORD}',|" ${WEB_CFG}
-                mysql -h "${MC_DB_HOST}" -u "${MC_DB_USER}" "-p${MC_DB_PASSWORD}" "${MC_DB_NAME_WEB}" < "${MC_DIR}/html/protected/data/panel/schema.mysql.sql"
+                mysql -h "${MC_DB_HOST}" -u "${MC_DB_USER}" "-p${MC_DB_PASSWORD}" "${MC_DB_NAME_WEB}" < "${MC_DIR}/html/protected/data/panel/schema.mysql.sql" > /dev/null 2>&1
 
                 # Set daemon settings
                 sed -i -E "s|^\s*'daemon_db'\s=>\s'(s\S*),|    'daemon_db' => 'mysql:host=${MC_DB_HOST};dbname=${MC_DB_NAME}',\n    'daemon_db_user' => '${MC_DB_USER}',\n    'daemon_db_pass' => '${MC_DB_PASSWORD}',|" ${WEB_CFG}
-                mysql -h "${MC_DB_HOST}" -u "${MC_DB_USER}" "-p${MC_DB_PASSWORD}" "${MC_DB_NAME}" < "${MC_DIR}/html/protected/data/daemon/schema.mysql.sql"
+                mysql -h "${MC_DB_HOST}" -u "${MC_DB_USER}" "-p${MC_DB_PASSWORD}" "${MC_DB_NAME}" < "${MC_DIR}/html/protected/data/daemon/schema.mysql.sql" > /dev/null 2>&1
 
             elif [ "$MC_DB_ENGINE" == "sqlite" ]; then
                 # Set Panel settings.
@@ -380,6 +384,10 @@ else
     rm /var/www/html/multicraft/install.php
 fi
 
+# Start and stop Multicraft to set permissions
+${MC_OPT_DIR}/bin/multicraft set_permissions
+sleep 1
+
 # Remove data folder to replace with symlink
 if [ -d ${MC_OPT_DIR}/data ]; then
     rm -r ${MC_OPT_DIR}/data
@@ -411,27 +419,38 @@ fi
 ln -s ${MC_DIR}/templates ${MC_OPT_DIR}/templates
 echo "[$(date +%Y-%m-%d_%T)] - Symlinked Templates"
 
-
-# Set data folder permissions
-echo "[$(date +%Y-%m-%d_%T)] - Set user and permissions to ${MC_DIR}"
-chown -R ${MC_USER} ${MC_DIR}
-chmod -R 775 ${MC_DIR}
-
 echo "[$(date +%Y-%m-%d_%T)] - Set user and permissions to ${MC_OPT_DIR}"
-chown -R ${MC_USER} ${MC_OPT_DIR}
+chown -R ${MC_USER} "${MC_DIR_OPT_ALL} ${MC_DIR_OPT_SERVERS}"
 chmod -R 775 ${MC_OPT_DIR}
-
-${MC_OPT_DIR}/bin/multicraft set_permissions
-sleep 1
 
 if [ "$MC_MULTIUSER" = "y" ]; then
     echo -n "[$(date +%Y-%m-%d_%T)] - Set special Multiuser permissions... "
     chown 0:users ${MC_OPT_DIR}/bin/useragent
     chmod 4550 ${MC_OPT_DIR}/bin/useragent
+
+    # Set data folder permissions
+    echo "[$(date +%Y-%m-%d_%T)] - Set user and permissions for ${MC_DIR}"
+    DIR=" `ls -lad ${MC_DIR_SERVERS}/*/ | tr -s ' ' | cut -d' ' -f9,3,4` "
+    arr=($DIR)
+    for ((i=0; i<${#arr[@]};i++)); do
+        echo "[$(date +%Y-%m-%d_%T)] - Set user for ${arr[$i+2]}"
+        chown -R ${arr[$i]}:${arr[$i+1]} ${arr[$i+2]}
+        i=$i+2
+    done
+    chown -R ${MC_USER} ${MC_DIR_ALL}
+    chmod -R 775 ${MC_DIR}
+else
+    # Set data folder permissions
+    echo "[$(date +%Y-%m-%d_%T)] - Set user and permissions to ${MC_DIR}"
+    chown -R ${MC_USER} "${MC_DIR_ALL} ${MC_DIR_SERVERS}"
+    chmod -R 775 ${MC_DIR}
+
+    #echo "[$(date +%Y-%m-%d_%T)] - Set user and permissions to ${MC_OPT_DIR}"
+    #chown -R ${MC_USER} "${MC_DIR_OPT_ALL} ${MC_DIR_OPT_SERVERS}"
+    #chmod -R 775 ${MC_OPT_DIR}
 fi
 
-
-# Start and stop Multicraft to set permissions
+# Start Multicraft
 ${MC_OPT_DIR}/bin/multicraft start
 sleep 1
 
