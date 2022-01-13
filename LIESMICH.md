@@ -1,6 +1,7 @@
 # Multicraft Docker
 Dockerized Multicraft-Server
 
+
 ![Multicraft version](https://img.shields.io/badge/Multicraft-2.4.1--64-brightgreen)
 ![GitHub](https://img.shields.io/github/license/MarioWi/multicraft-docker)
 
@@ -9,11 +10,15 @@ Dockerized Multicraft-Server
   <span>Deutsch</span>
 </p>
 
-
-Lies das in anderen Sprachen [english(https://github.com/MarioWi/multicraft-docker/blob/main/README.md)]
-
+# **ACHTUNG!**
+Aufgrund des letzten Updates an dem Kontainer, sind die beiden Konfig-Dateien apache.conf und multicraft.conf nicht zu 100% kompatibel.
+Wenn die alten Konbfigurationsdateien weiterhin verwendet werden, kommt es daher zu Fehlern und Multicraft sowie die Oberfläche starten nicht.
+Weitere Informationen unter: [Update](https://github.com/MarioWi/multicraft-docker/blob/main/UPDATE.md)
+---
+---
+---
 ## Beschreibung
-Inspieriert wurde dieser Docker-Container von den unter Credits genannten Repos. Jedoch konnte keines meine Bedürfnisse vollumfänglich erfüllen. Da ich mehrere Minecraft-Server laufen lassen wollte, benötigte ich mindestens 10 frei gegebene Ports. Für dynMap und GeyserMC werden jeweils auch ein zusätzlicher Port je Server benötigt, also nochmal 20 Ports mehr. Der Container sollte auch unter unRaid laufen können. Daher habe ich mich entschieden den Container auf Basis der oben genannten Repos an meine Bedürfnisse anzupassen.
+Inspieriert wurde dieser Docker-Kontainer von den unter Credits genannten Repos. Jedoch konnte keines meine Bedürfnisse vollumfänglich erfüllen. Da ich mehrere Minecraft-Server laufen lassen wollte, benötigte ich mindestens 10 frei gegebene Ports. Für dynMap und GeyserMC werden jeweils auch ein zusätzlicher Port je Server benötigt, also nochmal 20 Ports mehr. Der Container sollte auch unter unRaid laufen können. Daher habe ich mich entschieden den Container auf Basis der oben genannten Repos an meine Bedürfnisse anzupassen.
 
 ### Multicraft
 ![Multicraft](https://raw.githubusercontent.com/MarioWi/multicraft-docker/main/docs/Multicraft_logo.png) [Multicraft.org](www.multicraft.org) 
@@ -24,6 +29,7 @@ Multicraft ist eine Hosting Lösung mit integriertem Control Panel für Minecraf
 Mehr Informationen zur Benutzung und den Konfigurations-Möglichkeiten im [Wiki](../../wiki)
 
 ---
+
 
 
 ### Aufbau des Containers
@@ -46,6 +52,11 @@ Wie GeyserMC, Floodgate oder dynMap eingerichtet werden wie auch die Verwendung 
 
 ### unRaid
 Der Container wurde so angelegt, dass er auch unter unRaid ohne Schwierigkeiten lauffähig ist. So wurde die *umask* auf *000* gesetzt und es wurde darauf geachtet, dass als Benutzer *nobody* in der Gruppe *users* verwendet wird.
+
+
+Dieser Container wurde so entworfen, dass er nach dem ersten Start direkt einsatzbereit ist. Dazu wid auch das Panel anhand der übergebenen Variablen konfiguriert. Ebenso werden die Tabellen in der konfigurierten Datenbank initialisiert. Dafür wartet der Kontainer auf die Bereitschaft der  Datenbank. So entfällt auch die sonst übliche Panel Installation während des ersten starts.
+
+***`Bitte ändern Sie die standardzugangsdaten nach dem ersten Login. Der Sicherheit wegen!`***
 
 ---
 

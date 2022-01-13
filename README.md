@@ -9,6 +9,14 @@ Dockerized Multicraft-Server
   <a href="https://github.com/MarioWi/multicraft-docker/blob/main/LIESMICH.md">Deutsch</a>
 </p>
 
+# **ATTENTION!**
+Due to the last update to the container, the two config files *apache.conf* and *multicraft.conf* are not 100% compatible.
+If the old configuration files are still used, errors will occur and Multicraft and the user interface will not start.
+More information at: [Update](https://github.com/MarioWi/multicraft-docker/blob/main/UPDATE.md)
+---
+---
+---
+
 ## Description
 This Docker container was inspired by the repos mentioned under credits. However, none of them could fully meet my needs. Since I wanted to run multiple Minecraft servers, I needed at least 10 free ports. An additional port per server is required for dynMap and GeyserMC, i.e. another 20 ports more. The container should also be able to run under unRaid. Therefore I decided to adapt the container to my needs based on the repos mentioned above.
 
@@ -19,6 +27,12 @@ The Complete Minecraft Server Hosting Solution and Control Panel.
 
 
 More Information about usage and configuration possibilities in the [Wiki](../../wiki)
+
+
+This container was designed in such a way that it is ready for use immediately after the first start. For this purpose, the panel is also configured based on the transferred variables. The tables in the configured database are also initialized. To do this, the container waits for the database to be ready. This means that the usual panel installation during the first start is no longer necessary.
+
+
+***`Please change the standard login and passwort after the first login. For safety's sake!`***
 
 ---
 
