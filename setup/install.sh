@@ -27,6 +27,13 @@ else
 fi
 usermod -a -G www-data $USERNAME
 
+if [ !${USERNAME}="nobody" ]; then
+    useradd ${USERNAME} -s /bin/bash && 
+    usermod -d /home ${USERNAME} && 
+    usermod -a -G users www-data && 
+    chown -R ${USERNAME}:users /home
+fi
+
 # Safe username and groupname for aditional scripts
 mkdir -p /opt/multicraft/
 echo "$USERNAME" > "/opt/multicraft/USERNAME"

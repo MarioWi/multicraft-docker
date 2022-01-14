@@ -6,7 +6,7 @@ LABEL maintainer="email@mario-wicke.de" \
 ARG MASK=000 \
     USERID=99 \
     GROUPID=100 \
-    USERNAME="multicraft"
+    USERNAME="nobody"
 ENV MASK=${MASK} \
     USERID=${USERID} \
     GROUPID=${GROUPID} \
@@ -26,10 +26,16 @@ ENV EXTRA_PACKAGES="mlocate mysql-client" \
     PHP_PACKAGES="php${PHP_VERSION} php${PHP_VERSION}-cli libapache2-mod-php${PHP_VERSION} sqlite3 php${PHP_VERSION}-sqlite3 php${PHP_VERSION}-mysql php${PHP_VERSION}-gd php${PHP_VERSION}-pdo" \
     BUILD_PACKAGES="wget"
 
-RUN useradd ${USERNAME} -s /bin/bash && \
-    usermod -d /home ${USERNAME} && \
+#RUN useradd ${USERNAME} -s /bin/bash && \
+#    usermod -d /home ${USERNAME} && \
+#    usermod -a -G users www-data && \
+#    chown -R ${USERNAME}:users /home
+
+RUN usermod -u 99 nobody && \
+    usermod -g 100 nobody && \
+    usermod -d /home nobody && \
     usermod -a -G users www-data && \
-    chown -R ${USERNAME}:users /home
+    chown -R nobody:users /home
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends tzdata curl ca-certificates fontconfig locales \
